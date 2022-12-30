@@ -1,11 +1,27 @@
 import React from "react";
 
-const Modal = ({ modalPost }) => {
-  const handleUpdatePost = (event) => {
+const Modal = ({ modalPost, finder_id }) => {
+  const handleUpdatePost = async (event) => {
     event.preventDefault();
     const form = event.target;
     const updatedPost = form.updatedPost.value;
-    console.log(updatedPost);
+    const post = { updatedPost };
+
+    try {
+      fetch(`http://localhost:5000/posts/${finder_id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(post),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
   };
   return (
     <div>

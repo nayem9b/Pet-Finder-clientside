@@ -1,12 +1,13 @@
 import React from "react";
 
-const Blog = ({ post, setModalPost }) => {
+const Blog = ({ post, setModalPost, setFinder_id }) => {
   console.log(post);
-  const { description, username, votes, modalPost } = post;
+  const { description, username, votes, modalPost, finder_id } = post;
 
   const title = description.slice(0, 30);
   const handleOpenModal = () => {
     setModalPost(description);
+    setFinder_id(finder_id);
   };
   return (
     <div>
@@ -41,7 +42,7 @@ const Blog = ({ post, setModalPost }) => {
                 </a>
                 <label
                   htmlFor='updatingmodal'
-                  className='btn text-black border-none bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-pink-300 via-purple-300 to-indigo-300'
+                  className='btn btn-primary'
                   onClick={handleOpenModal}>
                   update
                 </label>

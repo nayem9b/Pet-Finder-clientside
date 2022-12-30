@@ -5,7 +5,8 @@ import Blog from "./Blog";
 const PostBlog = () => {
   const [posts, setPosts] = useState([]);
   const [modalPost, setModalPost] = useState("");
-  console.log(modalPost);
+  const [finder_id, setFinder_id] = useState();
+  console.log(modalPost, finder_id);
   const getPosts = async () => {
     try {
       const response = await fetch("http://localhost:5000/posts");
@@ -25,9 +26,10 @@ const PostBlog = () => {
         <Blog
           post={post}
           setModalPost={setModalPost}
-          modalPost={modalPost}></Blog>
+          modalPost={modalPost}
+          setFinder_id={setFinder_id}></Blog>
       ))}
-      <Modal modalPost={modalPost}></Modal>
+      <Modal modalPost={modalPost} finder_id={finder_id}></Modal>
     </div>
   );
 };
