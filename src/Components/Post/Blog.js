@@ -1,6 +1,6 @@
 import React from "react";
 
-const Blog = ({ post, setModalPost, setFinder_id }) => {
+const Blog = ({ post, setModalPost, setFinder_id, setPosts, posts }) => {
   console.log(post);
   const { description, username, votes, modalPost, finder_id } = post;
 
@@ -8,6 +8,21 @@ const Blog = ({ post, setModalPost, setFinder_id }) => {
   const handleOpenModal = () => {
     setModalPost(description);
     setFinder_id(finder_id);
+  };
+
+  // Delete the post
+  const handleDeletePost = async (id) => {
+    try {
+      const deleteThePost = await fetch(`http://localhost:5000/posts/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+
+      console.log("I have worked");
+
+      setPosts(posts.filter((post) => post.finder_id !== id));
+    } catch (error) {}
   };
   return (
     <div>
@@ -46,6 +61,11 @@ const Blog = ({ post, setModalPost, setFinder_id }) => {
                   onClick={handleOpenModal}>
                   update
                 </label>
+                <button
+                  className='btn btn-error'
+                  onClick={() => handleDeletePost(finder_id)}>
+                  Delete
+                </button>
               </div>
             </div>
           </div>

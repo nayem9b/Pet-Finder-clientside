@@ -27,7 +27,9 @@ const PostBlog = () => {
           post={post}
           setModalPost={setModalPost}
           modalPost={modalPost}
-          setFinder_id={setFinder_id}></Blog>
+          setFinder_id={setFinder_id}
+          posts={posts}
+          setPosts={setPosts}></Blog>
       ))}
       <Modal modalPost={modalPost} finder_id={finder_id}></Modal>
     </div>
