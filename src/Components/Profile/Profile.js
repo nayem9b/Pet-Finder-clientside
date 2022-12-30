@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../Context/UserContext";
 
 const Profile = () => {
@@ -7,7 +7,16 @@ const Profile = () => {
     event.preventDefault();
     const form = event.target;
     const post = form.post.value;
-    console.log(post);
+    const addedPost = {
+      post: post,
+    };
+    fetch("http://localhost:5000/post", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(addedPost),
+    })
+      .then((res) => res.json)
+      .then((data) => console.log(data));
     form.reset();
   };
   return (
