@@ -1,23 +1,55 @@
-import React from "react";
+import { getAuth, updateProfile } from "firebase/auth";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/UserContext";
 
 const SignUp = () => {
+  const { googleSignIn, userSignUp } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const userName = form.userName.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password, userName);
+    userSignUp(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        updateProfile(auth.currentUser, {
+          displayName: userName,
+        }).catch((error) => console.log(error));
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((result) => console.log(result));
+    navigate("/");
+  };
+
   return (
     <div>
       <section class=' overflow-hidden'>
         <div class='flex min- overflow-hidden'>
           <div class='relative flex-1 hidden w-0 overflow-hidden lg:block'>
             <img
-              class='absolute inset-0 object-cover w-full h-full bg-black'
-              src='/assets/images/placeholders/rectangleWide.png'
+              class='absolute inset-0 object-cover w-full h-full '
+              src='https://images.unsplash.com/photo-1545529468-42764ef8c85f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80'
               alt=''
             />
           </div>
           <div class='flex flex-col justify-center flex-1 px-4 py-12 overflow-hidden sm:px-6 lg:flex-none lg:px-20 xl:px-24'>
             <div class='w-full max-w-xl mx-auto lg:w-96'>
               <div>
-                <a href='./index.html' class='text-blue-600 text-medium'>
-                  wickedblocks
-                </a>
+                <Link
+                  to='/'
+                  class='text-3xl text-medium font-extrabold  text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
+                  Pet Finder
+                </Link>
                 <h2 class='mt-6 text-3xl font-extrabold text-neutral-600'>
                   Sign in.
                 </h2>
@@ -25,11 +57,26 @@ const SignUp = () => {
 
               <div class='mt-8'>
                 <div class='mt-6'>
-                  <form
-                    action='#'
-                    method='POST'
-                    class='space-y-6'
-                    data-dashlane-rid='61e9cf0f26743442'>
+                  <form class='space-y-6' onSubmit={handleOnSubmit}>
+                    <div>
+                      <label
+                        for='userName'
+                        class='block text-sm font-medium text-neutral-600'>
+                        {" "}
+                        User Name{" "}
+                      </label>
+                      <div class='mt-1'>
+                        <input
+                          id='userName'
+                          name='userName'
+                          type='text'
+                          placeholder='user name'
+                          class='block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300'
+                          data-dashlane-rid='639a2c6a013136c1'
+                          data-kwimpalastatus='dead'
+                        />
+                      </div>
+                    </div>
                     <div>
                       <label
                         for='email'
@@ -125,39 +172,14 @@ const SignUp = () => {
                   </div>
                   <div>
                     <button
-                      type='submit'
+                      onClick={handleGoogleSignIn}
                       class='w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'>
                       <div class='flex items-center justify-center'>
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          xmlns:xlink='http://www.w3.org/1999/xlink'
-                          class='w-6 h-6'
-                          viewBox='0 0 48 48'>
-                          <defs>
-                            <path
-                              id='a'
-                              d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'></path>
-                          </defs>
-                          <clipPath id='b'>
-                            <use xlink:href='#a' overflow='visible'></use>
-                          </clipPath>
-                          <path
-                            clip-path='url(#b)'
-                            fill='#FBBC05'
-                            d='M0 37V11l17 13z'></path>
-                          <path
-                            clip-path='url(#b)'
-                            fill='#EA4335'
-                            d='M0 11l17 13 7-6.1L48 14V0H0z'></path>
-                          <path
-                            clip-path='url(#b)'
-                            fill='#34A853'
-                            d='M0 37l30-23 7.9 1L48 0v48H0z'></path>
-                          <path
-                            clip-path='url(#b)'
-                            fill='#4285F4'
-                            d='M48 48L17 24l-4-3 35-10z'></path>
-                        </svg>
+                        <img
+                          className='h-8'
+                          src='https://cdn-icons-png.flaticon.com/512/2991/2991148.png'
+                          alt=''
+                        />
                         <span class='ml-4'> Log in with Google</span>
                       </div>
                     </button>
