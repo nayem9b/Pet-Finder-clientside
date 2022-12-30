@@ -4,7 +4,7 @@ const Blog = ({ post, setModalPost, setFinder_id }) => {
   console.log(post);
   const { description, username, votes, modalPost, finder_id } = post;
 
-  const title = description.slice(0, 30);
+  // const title = description.slice(0, 30);
   const handleOpenModal = () => {
     setModalPost(description);
     setFinder_id(finder_id);
@@ -23,7 +23,7 @@ const Blog = ({ post, setModalPost, setFinder_id }) => {
               </div>
               <div class='md:flex-grow'>
                 <h2 class='text-2xl font-medium text-gray-900 title-font mb-2'>
-                  {title}
+                  {/* {title} */}
                 </h2>
                 <p class='leading-relaxed'>{description}</p>
                 <a class='text-indigo-500 inline-flex items-center mt-4'>

@@ -5,7 +5,8 @@ const Modal = ({ modalPost, finder_id }) => {
     event.preventDefault();
     const form = event.target;
     const updatedPost = form.updatedPost.value;
-    const post = { updatedPost };
+    const post = { description: updatedPost };
+    console.log(post);
 
     try {
       fetch(`http://localhost:5000/posts/${finder_id}`, {
