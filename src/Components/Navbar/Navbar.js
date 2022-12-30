@@ -27,12 +27,17 @@ const Navbar = () => {
           </div>
 
           <div class='flex items-center gap-4'>
-            <a href='#'>
-              <span class='sr-only'>Logo</span>
-              <span class='h-10 w-20 rounded-lg bg-gray-200'></span>
-            </a>
+            <Link className='flex' to='/'>
+              <img
+                src='https://cdn-icons-png.flaticon.com/512/5267/5267302.png'
+                className='h-10'
+                alt=''
+              />
 
-            <form class='mb-0 hidden lg:flex'>
+              <h1 class='h-10  text-2xl ml-4'> Pet Finder</h1>
+            </Link>
+
+            <form class='mb-0 hidden lg:flex '>
               <div class='relative'>
                 <input
                   class='h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-300 focus:z-10'
