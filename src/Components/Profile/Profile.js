@@ -10,7 +10,7 @@ const Profile = () => {
     const addedPost = {
       post: post,
     };
-    fetch("http://localhost:5000/post", {
+    fetch("https://petfinderserver-nayem9b.vercel.app/post", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(addedPost),

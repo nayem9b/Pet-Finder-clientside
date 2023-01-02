@@ -9,7 +9,7 @@ const Modal = ({ modalPost, finder_id }) => {
     console.log(post);
 
     try {
-      fetch(`http://localhost:5000/posts/${finder_id}`, {
+      fetch(`https://petfinderserver-nayem9b.vercel.app/posts/${finder_id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

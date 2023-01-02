@@ -9,7 +9,9 @@ const PostBlog = () => {
   console.log(modalPost, finder_id);
   const getPosts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/posts");
+      const response = await fetch(
+        "https://petfinderserver-nayem9b.vercel.app/posts"
+      );
       const jsonData = await response.json();
       setPosts(jsonData);
     } catch (err) {
